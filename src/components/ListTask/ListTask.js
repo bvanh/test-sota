@@ -97,7 +97,6 @@ function ListTask(props) {
           listTodo={listTodo}
           setListTodo={setListTodo}
           setShowDetail={setShowDetail}
-          //   setTodoIndex={setTodoIndex}
         />
       </div>
     </div>
@@ -112,7 +111,7 @@ function ListTask(props) {
           onChange={getSearchTask}
         />
       </Row>
-      {printListTodo}
+      {listTodo.length > 0 ? printListTodo : <i>Tasks is emtry</i>}
       {arrTaskCheck.length > 0 && (
         <Row className="task-action" justify="space-between">
           <p>Bulk Action:</p>

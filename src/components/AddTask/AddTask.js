@@ -51,18 +51,21 @@ function NewTask(props) {
     return current && current < moment().endOf("day");
   };
   const addTodo = async () => {
-    if (isDetail) {
-      setListTodo(listTodo);
-      addToLocal(listTodo);
-      setShowDetail(null);
-    } else {
-      if (name !== "") {
-        addToLocal([{ ...todoIndex, id: Date.now() }, ...listTodo]);
-        setListTodo([{ ...todoIndex, id: Date.now() }, ...listTodo]);
-        setTodoIndex({ ...todoIndex, name: "", des: "" });
-      } else {
-        window.alert("Check task name again!");
-      }
+    switch (isDetail) {
+      case true:
+        setListTodo(listTodo);
+        addToLocal(listTodo);
+        setShowDetail(null);
+        break;
+      default:
+        if (name !== "") {
+          addToLocal([{ ...todoIndex, id: Date.now() }, ...listTodo]);
+          setListTodo([{ ...todoIndex, id: Date.now() }, ...listTodo]);
+          setTodoIndex({ ...todoIndex, name: "", des: "" });
+        } else {
+          window.alert("Check task name again!");
+        }
+        break;
     }
   };
   const printPrior = listPrior.map((val, index) => (
@@ -82,8 +85,9 @@ function NewTask(props) {
         value={name}
         name="name"
         onChange={getNameAndDes}
+        onPressEnter={addTodo}
       ></Input>
-      <TextArea value={des} name="des" onChange={getNameAndDes} />
+      <TextArea value={des} name="des" onChange={getNameAndDes} onPressEnter={addTodo}/>
       <Row justify="space-between">
         <Col span={11}>
           <DatePicker
