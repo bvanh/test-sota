@@ -4,9 +4,13 @@ const localService = {
   },
   getTodo: () => {
     const dataTodo = localStorage.getItem("todoList");
-    if (dataTodo) {
-      return JSON.parse(dataTodo);
-    } else {
+    try {
+      if (typeof JSON.parse(dataTodo) === 'object') {
+        return JSON.parse(dataTodo);
+      } else {
+        return [];
+      }
+    } catch {
       return [];
     }
   },

@@ -87,7 +87,12 @@ function NewTask(props) {
         onChange={getNameAndDes}
         onPressEnter={addTodo}
       ></Input>
-      <TextArea value={des} name="des" onChange={getNameAndDes} onPressEnter={addTodo}/>
+      <TextArea
+        value={des}
+        name="des"
+        onChange={getNameAndDes}
+        onPressEnter={addTodo}
+      />
       <Row justify="space-between">
         <Col span={11}>
           <DatePicker
