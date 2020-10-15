@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import moment from "moment";
 import localService from "../../ultil/localService";
 import { Row, Col, Input, DatePicker, Select, Button } from "antd";
 import "./style.scss";
-const { addToLocal, getTodo } = localService;
+const { addToLocal } = localService;
 const { TextArea } = Input;
 const { Option } = Select;
 const dateFormat = "DD-MM-YYYY";
@@ -48,15 +48,7 @@ function NewTask(props) {
     }
   };
   const disabledDate = (current) => {
-    // console.log();
-    // if (isDetail) {
-    //   return (
-    //     endValue.valueOf() <= startValue.valueOf() ||
-    //     endValue > moment().endOf("day")
-    //   );
-    // } else {
     return current && current < moment().endOf("day");
-    // }
   };
   const addTodo = async () => {
     if (isDetail) {

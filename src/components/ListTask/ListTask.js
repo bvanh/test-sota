@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from "react";
-import moment from "moment";
+import React, { useState } from "react";
 import localService from "../../ultil/localService";
 import NewTask from "../AddTask/AddTask";
-import { Row, Col, Input, DatePicker, Select, Button, Checkbox } from "antd";
+import { Row, Col, Input, Checkbox } from "antd";
 import "./style.scss";
-const { addToLocal, getTodo } = localService;
-const { TextArea } = Input;
-const { Option } = Select;
-const dateFormat = "DD-MM-YYYY";
-const listPrior = ["High", "Normal", "Low"];
+const { addToLocal } = localService;
 function ListTask(props) {
   const { listTodo, setListTodo, setSearchTask, searchTask } = props;
   const [todoIndex, setTodoIndex] = useState({
