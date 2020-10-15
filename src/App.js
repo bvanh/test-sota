@@ -1,25 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState, useEffect } from "react";
+import moment from "moment";
+import NewTask from "./components/AddTask/AddTask";
+import ListTask from "./components/ListTask/ListTask";
+import { Row } from "antd";
+import localService from "./ultil/localService";
+import "./App.scss";
+const { getTodo } = localService;
 function App() {
+  const [listTodo, setListTodo] = useState([]);
+  const [todoIndex, setTodoIndex] = useState({
+    id: null,
+    name: "",
+    des: "",
+    date: moment().format("DD-MM-YYYY"),
+    prior: "Normal",
+    isComplete: false,
+  });
+  const [searchTask, setSearchTask] = useState("");
+  useEffect(() => {
+    const newListTodo = getTodo().filter(
+      (val) =>
+        val.name
+          .toLowerCase()
+          .split(" ")
+          .join("")
+          .indexOf(searchTask.toLowerCase().split(" ").join("")) !== -1
+    );
+    setListTodo(newListTodo);
+  }, [searchTask]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Row justify="center" className="App">
+      <NewTask
+        listTodo={listTodo}
+        setListTodo={setListTodo}
+        todoIndex={todoIndex}
+        setTodoIndex={setTodoIndex}
+        isDetail={false}
+      />
+      <ListTask
+        listTodo={listTodo}
+        setListTodo={setListTodo}
+        todoIndex={todoIndex}
+        setTodoIndex={setTodoIndex}
+        searchTask={searchTask}
+        setSearchTask={setSearchTask}
+      />
+    </Row>
   );
 }
 

@@ -1,0 +1,16 @@
+@import "../../App.scss";
+.new-task {
+  @extend .pd-static;
+  h2{
+    float: left;
+  }
+  .ant-input {
+    margin-bottom: 1rem;
+  }
+  .btn-add-todo {
+    @extend .btn-add;
+  }
+}
+.edit-task{
+  border: 0;
+}
