@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import moment from "moment";
 import NewTask from "./components/AddTask/AddTask";
 import ListTask from "./components/ListTask/ListTask";
+import Demo from "./components/Demo";
 import { Row } from "antd";
 import localService from "./ultil/localService";
 import "./App.scss";
@@ -17,6 +18,7 @@ function App() {
     isComplete: false,
   });
   const [searchTask, setSearchTask] = useState("");
+  const renderDemo = useMemo(() => <Demo />, [searchTask]);
   useEffect(() => {
     const newListTodo = getTodo().filter(
       (val) =>
@@ -45,6 +47,7 @@ function App() {
         searchTask={searchTask}
         setSearchTask={setSearchTask}
       />
+      {renderDemo}
     </Row>
   );
 }

@@ -5,7 +5,7 @@ const localService = {
   getTodo: () => {
     const dataTodo = localStorage.getItem("todoList");
     try {
-      if (typeof JSON.parse(dataTodo) === 'object') {
+      if (typeof JSON.parse(dataTodo) === "object") {
         return JSON.parse(dataTodo);
       } else {
         return [];
